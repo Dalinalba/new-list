@@ -1,18 +1,17 @@
-
+// src/components/VehicleDetails.jsx
 import React from 'react';
 
-const VehicleDetails = ({ video, navigateTo }) => {
+const VehicleDetails = ({ video }) => {
   return (
     <div>
-      <h2>{video.name} Details</h2>
+      <h2>{video.name}</h2>
       <p>
-        Video Link: <a href={video.videoLink} target="_blank" rel="noopener noreferrer">{video.videoLink}</a>
+        Video Link: <a href={video.videoLink}>{video.videoLink}</a>
       </p>
       <p>Video Date: {video.videoDate}</p>
       <p>Brand: {video.brand}</p>
       <p>Model: {video.model}</p>
-      <p>Electric Vehicle Type: {video.electricVehicleType}</p>
-      <button onClick={() => navigateTo('list')}>Back to List</button>
+      <p>Vehicle Type: {video.vehicleType}</p>
     </div>
   );
 };

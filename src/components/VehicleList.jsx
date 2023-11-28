@@ -1,14 +1,17 @@
-// VehicleList.jsx
+// src/components/VehicleList.jsx
 import React from 'react';
 
-const VehicleList = ({ videos, navigateTo }) => {
+const VehicleList = ({ videos, onVideoClick }) => {
   return (
     <div>
-      <h2>Video List</h2>
+      <h2>Vehicle List</h2>
       <ul>
         {videos.map((video) => (
           <li key={video.name}>
-            <button onClick={() => navigateTo('details', { name: video.name })}>{video.name}</button> - {video.videoDate}, {video.brand}, {video.model}, {video.electricVehicleType}
+            <a href="#" onClick={() => onVideoClick(video)}>
+              {video.name}
+            </a>{' '}
+            - {video.videoDate} - {video.brand} - {video.model} - {video.vehicleType}
           </li>
         ))}
       </ul>

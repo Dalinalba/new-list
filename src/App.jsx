@@ -1,39 +1,34 @@
-
-
-import './App.css'
+// src/App.jsx
 import React, { useState } from 'react';
 import AdminPage from './pages/AdminPage';
 import VehicleListPage from './pages/VehicleListPage';
 import VehicleDetailsPage from './pages/VehicleDetailsPage';
-import Header from './Components/Header'
 
-function App() {
-    const [currentPage, setCurrentPage] = useState('admin');
+const App = () => {
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const navigateTo = (page) => {
-    setCurrentPage(page);
+  const handleAddVideo = (newVideo) => {
+    setVideos((prevVideos) => [...prevVideos, newVideo]);
   };
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'admin':
-        return <AdminPage navigateTo={navigateTo} />;
-      case 'list':
-        return <VehicleListPage navigateTo={navigateTo} />;
-      case 'details':
-        return <VehicleDetailsPage navigateTo={navigateTo} />;
-      default:
-        return null;
-    }
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
   };
+
   return (
-<>
     <div>
-    <Header/>
-    </div>
-    <div>{renderPage()}</div>
-    </>
-  )
-}
+      {!selectedVideo && (
+        <div>
+          <button onClick={() => setSelectedVideo(null)}>Back to List</button>
+          <AdminPage onAddVideo={handleAddVideo} />
+          <VehicleListPage videos={videos} onVideoClick={handleVideoClick} />
+        </div>
+      )}
 
-export default App
+      {selectedVideo && <VehicleDetailsPage video={selectedVideo} />}
+    </div>
+  );
+};
+
+export default App;
